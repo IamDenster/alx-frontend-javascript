@@ -1,52 +1,26 @@
-// task_1/js/main.ts
-
 // Existing Teacher interface
 interface Teacher {
-  readonly firstName: string;      // Only set on initialization
-  readonly lastName: string;       // Only set on initialization
+  readonly firstName: string;      // Set only at initialization
+  readonly lastName: string;       // Set only at initialization
   fullTimeEmployee: boolean;       // Always defined
   yearsOfExperience?: number;      // Optional
   location: string;                // Always defined
-  [key: string]: any;              // Allow any other attribute dynamically
+  [key: string]: any;              // Allow any extra attributes
 }
 
-// Teacher examples
-const teacher1: Teacher = {
-  firstName: "Alice",
-  lastName: "Johnson",
-  fullTimeEmployee: true,
-  location: "New York",
-  yearsOfExperience: 5,
-};
-
-const teacher2: Teacher = {
-  firstName: "Bob",
-  lastName: "Smith",
-  fullTimeEmployee: false,
-  location: "Paris",
-};
-
-const teacher3: Teacher = {
-  firstName: "John",
-  lastName: "Doe",
-  fullTimeEmployee: false,
-  location: "London",
-  contract: false,
-};
-
-// Step 1: Define Directors interface that extends Teacher
-interface Directors extends Teacher {
-  numberOfReports: number;  // required attribute for directors
+// Director interface extending Teacher
+interface Director extends Teacher {
+  numberOfReports: number;         // Required for directors
 }
 
-// Step 2: Create a director object
-const director1: Directors = {
+// Example usage
+const director1: Director = {
   firstName: "John",
   lastName: "Doe",
-  location: "London",
   fullTimeEmployee: true,
+  location: "London",
   numberOfReports: 17,
+  contract: true,                  // Extra dynamic attribute
 };
 
-// Step 3: Log to console
 console.log(director1);
