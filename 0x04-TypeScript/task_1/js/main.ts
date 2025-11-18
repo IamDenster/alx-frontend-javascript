@@ -1,45 +1,52 @@
-// --- Teacher class and Directors interface from previous steps ---
+// task_1/js/main.ts
 
-class Teacher {
-  readonly firstName: string;
-  readonly lastName: string;
-  fullTimeEmployee: boolean;
-  yearsOfExperience?: number;
-  location: string;
-  [key: string]: any;
-
-  constructor({ firstName, lastName, fullTimeEmployee, yearsOfExperience, location, ...rest }: {
-    firstName: string;
-    lastName: string;
-    fullTimeEmployee: boolean;
-    yearsOfExperience?: number;
-    location: string;
-    [key: string]: any;
-  }) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.fullTimeEmployee = fullTimeEmployee;
-    this.yearsOfExperience = yearsOfExperience;
-    this.location = location;
-
-    Object.assign(this, rest);
-  }
+// Existing Teacher interface
+interface Teacher {
+  readonly firstName: string;      // Only set on initialization
+  readonly lastName: string;       // Only set on initialization
+  fullTimeEmployee: boolean;       // Always defined
+  yearsOfExperience?: number;      // Optional
+  location: string;                // Always defined
+  [key: string]: any;              // Allow any other attribute dynamically
 }
 
-interface Directors extends Teacher {
-  numberOfReports: number;
-}
-
-// --- Function interface ---
-interface printTeacherFunction {
-  (firstName: string, lastName: string): string;
-}
-
-// --- Function implementation ---
-const printTeacher: printTeacherFunction = (firstName, lastName) => {
-  return `${firstName} ${lastName}`;
+// Teacher examples
+const teacher1: Teacher = {
+  firstName: "Alice",
+  lastName: "Johnson",
+  fullTimeEmployee: true,
+  location: "New York",
+  yearsOfExperience: 5,
 };
 
-// --- Examples ---
-console.log(printTeacher("John", "Doe")); // John Doe
-console.log(printTeacher("Jane", "Smith")); // Jane Smith
+const teacher2: Teacher = {
+  firstName: "Bob",
+  lastName: "Smith",
+  fullTimeEmployee: false,
+  location: "Paris",
+};
+
+const teacher3: Teacher = {
+  firstName: "John",
+  lastName: "Doe",
+  fullTimeEmployee: false,
+  location: "London",
+  contract: false,
+};
+
+// Step 1: Define Directors interface that extends Teacher
+interface Directors extends Teacher {
+  numberOfReports: number;  // required attribute for directors
+}
+
+// Step 2: Create a director object
+const director1: Directors = {
+  firstName: "John",
+  lastName: "Doe",
+  location: "London",
+  fullTimeEmployee: true,
+  numberOfReports: 17,
+};
+
+// Step 3: Log to console
+console.log(director1);
