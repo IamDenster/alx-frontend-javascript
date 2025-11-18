@@ -1,12 +1,12 @@
 // task_1/js/main.ts
 
 // Step 1: Define the interface for the function
-interface PrintTeacherFunction {
+interface PrintTeacher {
   (firstName: string, lastName: string): string;
 }
 
 // Step 2: Implement the function using the interface
-const printTeacher: PrintTeacherFunction = (firstName, lastName) => {
+const printTeacher: PrintTeacher = (firstName, lastName) => {
   return `${firstName} ${lastName}`;
 };
 
