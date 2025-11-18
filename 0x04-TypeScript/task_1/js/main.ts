@@ -1,43 +1,43 @@
 // task_1/js/main.ts
 
-// Existing Teacher interface
+// Teacher interface
 interface Teacher {
-  readonly firstName: string;      // Set only at initialization
-  readonly lastName: string;       // Set only at initialization
-  fullTimeEmployee: boolean;       // Always defined
-  yearsOfExperience?: number;      // Optional
-  location: string;                // Always defined
-  [key: string]: any;              // Allow any extra attributes
+  readonly firstName: string;
+  readonly lastName: string;
+  fullTimeEmployee: boolean;
+  yearsOfExperience?: number;
+  location: string;
+  [key: string]: any;
 }
 
 // Director interface extending Teacher
 interface Director extends Teacher {
-  numberOfReports: number;         // Required for directors
+  numberOfReports: number;
 }
 
-// Example Director usage
+// Example Director
 const director1: Director = {
   firstName: "John",
   lastName: "Doe",
   fullTimeEmployee: true,
   location: "London",
   numberOfReports: 17,
-  contract: true,                  // Extra dynamic attribute
+  contract: true,
 };
 
 console.log(director1);
 
 // -----------------------------
-// Step 1: Define interface for the function
-interface PrintTeacherFunction {
-  (firstName: string, lastName: string): string;
+// Interface for the function
+interface printTeacherFunction {
+  (teacher: { firstName: string; lastName: string }): string;
 }
 
-// Step 2: Implement the function
-const printTeacher: PrintTeacherFunction = (firstName, lastName) => {
-  return `${firstName} ${lastName}`;
+// Function implementation
+const printTeacher: printTeacherFunction = ({ firstName, lastName }) => {
+  return `${firstName[0]}. ${lastName}`;
 };
 
-// Step 3: Example usage
-console.log(printTeacher("John", "Doe"));      // Output: John Doe
-console.log(printTeacher(director1.firstName, director1.lastName)); // Output: John Doe
+// Example usage
+console.log(printTeacher({ firstName: "John", lastName: "Doe" })); // Output: J. Doe
+console.log(printTeacher({ firstName: director1.firstName, lastName: director1.lastName })); // Output: J. Doe
