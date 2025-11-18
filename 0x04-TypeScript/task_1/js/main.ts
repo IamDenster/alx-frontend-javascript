@@ -1,13 +1,4 @@
-// Base Teacher interface/type
-type TeacherOptions = {
-  firstName: string;
-  lastName: string;
-  fullTimeEmployee: boolean;
-  yearsOfExperience?: number;
-  location: string;
-  [key: string]: any; // Allow extra attributes
-};
-
+// Base Teacher class
 class Teacher {
   readonly firstName: string;
   readonly lastName: string;
@@ -16,7 +7,14 @@ class Teacher {
   location: string;
   [key: string]: any;
 
-  constructor({ firstName, lastName, fullTimeEmployee, yearsOfExperience, location, ...rest }: TeacherOptions) {
+  constructor({ firstName, lastName, fullTimeEmployee, yearsOfExperience, location, ...rest }: {
+    firstName: string;
+    lastName: string;
+    fullTimeEmployee: boolean;
+    yearsOfExperience?: number;
+    location: string;
+    [key: string]: any;
+  }) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.fullTimeEmployee = fullTimeEmployee;
@@ -38,8 +36,8 @@ const teacher3 = new Teacher({
 
 console.log(teacher3);
 
-// --- Directors Interface ---
-interface Directors extends TeacherOptions {
+// --- Directors interface extending the Teacher class ---
+interface Directors extends Teacher {
   numberOfReports: number;
 }
 
