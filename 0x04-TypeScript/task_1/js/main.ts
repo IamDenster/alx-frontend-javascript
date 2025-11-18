@@ -1,4 +1,5 @@
-// Base Teacher class
+// --- Teacher class and Directors interface from previous steps ---
+
 class Teacher {
   readonly firstName: string;
   readonly lastName: string;
@@ -25,29 +26,20 @@ class Teacher {
   }
 }
 
-// Example Teacher
-const teacher3 = new Teacher({
-  firstName: 'John',
-  lastName: 'Doe',
-  fullTimeEmployee: false,
-  location: 'London',
-  contract: false
-});
-
-console.log(teacher3);
-
-// --- Directors interface extending the Teacher class ---
 interface Directors extends Teacher {
   numberOfReports: number;
 }
 
-// Example Director
-const director1: Directors = {
-  firstName: 'John',
-  lastName: 'Doe',
-  location: 'London',
-  fullTimeEmployee: true,
-  numberOfReports: 17
+// --- Function interface ---
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
+}
+
+// --- Function implementation ---
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
+  return `${firstName} ${lastName}`;
 };
 
-console.log(director1);
+// --- Examples ---
+console.log(printTeacher("John", "Doe")); // John Doe
+console.log(printTeacher("Jane", "Smith")); // Jane Smith
