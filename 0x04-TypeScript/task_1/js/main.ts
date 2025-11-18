@@ -1,59 +1,55 @@
-interface Teacher {
+// Base Teacher interface/type
+type TeacherOptions = {
+  firstName: string;
+  lastName: string;
+  fullTimeEmployee: boolean;
+  yearsOfExperience?: number;
+  location: string;
+  [key: string]: any; // Allow extra attributes
+};
+
+class Teacher {
   readonly firstName: string;
   readonly lastName: string;
   fullTimeEmployee: boolean;
   yearsOfExperience?: number;
   location: string;
   [key: string]: any;
+
+  constructor({ firstName, lastName, fullTimeEmployee, yearsOfExperience, location, ...rest }: TeacherOptions) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.fullTimeEmployee = fullTimeEmployee;
+    this.yearsOfExperience = yearsOfExperience;
+    this.location = location;
+
+    Object.assign(this, rest);
+  }
 }
 
-interface Directors extends Teacher {
+// Example Teacher
+const teacher3 = new Teacher({
+  firstName: 'John',
+  lastName: 'Doe',
+  fullTimeEmployee: false,
+  location: 'London',
+  contract: false
+});
+
+console.log(teacher3);
+
+// --- Directors Interface ---
+interface Directors extends TeacherOptions {
   numberOfReports: number;
 }
 
-interface printTeacherFunction {
-  (firstName: string, lastName: string): string;
-}
-
-const printTeacher: printTeacherFunction = (firstName: string, lastName: string): string => {
-  return `${firstName} ${lastName}`;
+// Example Director
+const director1: Directors = {
+  firstName: 'John',
+  lastName: 'Doe',
+  location: 'London',
+  fullTimeEmployee: true,
+  numberOfReports: 17
 };
 
-// ------------------------------
-// Student Class Section
-// ------------------------------
-
-// Interface for the constructor
-interface StudentConstructor {
-  new(firstName: string, lastName: string): StudentClassInterface;
-}
-
-// Interface describing the student class
-interface StudentClassInterface {
-  displayName(): string;
-  workOnHomework(): string;
-}
-
-// Class implementation
-class StudentClass implements StudentClassInterface {
-  private firstName: string;
-  private lastName: string;
-
-  constructor(firstName: string, lastName: string) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
-
-  workOnHomework(): string {
-    return "Currently working";
-  }
-
-  displayName(): string {
-    return this.firstName;
-  }
-}
-
-// Example usage:
-const student = new StudentClass("John", "Doe");
-console.log(student.displayName());        // John
-console.log(student.workOnHomework());     // Currently working
+console.log(director1);
